@@ -51,3 +51,54 @@ Content-Type: application/json
 }
 
 ###
+
+# Update a deployment
+PUT {{PlatformOrchestrator.Api_HostAddress}}/api/orchestrator/deployments/{deploymentId}
+Content-Type: application/json
+
+{
+  "name": "updated-vm",
+  "resourceType": "virtualmachine",
+  "region": "westus"
+}
+
+###
+
+# Delete a deployment
+DELETE {{PlatformOrchestrator.Api_HostAddress}}/api/orchestrator/deployments/{deploymentId}
+Accept: application/json
+
+###
+
+# Administration: Get all users
+GET {{PlatformOrchestrator.Api_HostAddress}}/api/admin/users
+Accept: application/json
+
+###
+
+# Administration: Add a new user
+POST {{PlatformOrchestrator.Api_HostAddress}}/api/admin/users
+Content-Type: application/json
+
+{
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "role": "admin"
+}
+
+###
+
+# Administration: Update user details
+PUT {{PlatformOrchestrator.Api_HostAddress}}/api/admin/users/{userId}
+Content-Type: application/json
+
+{
+  "email": "updateduser@example.com",
+  "role": "user"
+}
+
+###
+
+# Administration: Delete a user
+DELETE {{PlatformOrchestrator.Api_HostAddress}}/api/admin/users/{userId}
+Accept: application/json

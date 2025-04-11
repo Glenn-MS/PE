@@ -3,6 +3,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using PlatformOrchestrator.Api.Middleware;
 using PlatformOrchestrator.Infrastructure;
 using System.Diagnostics;
@@ -50,6 +51,29 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 // Add health checks
 builder.Services.AddHealthChecks()
     .AddCheck<PlatformOrchestrator.Api.Health.OrchestratorHealthCheck>("orchestrator_health");
+
+builder.Services.AddSingleton<IUserService, UserService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://login.microsoftonline.com/{tenantId}";
+        options.Audience = "{clientId}";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "https://sts.windows.net/{tenantId}/",
+            ValidateAudience = true,
+            ValidAudience = "{clientId}",
+            ValidateLifetime = true
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy =>
+        policy.RequireRole("admin"));
+});
 
 var app = builder.Build();
 
