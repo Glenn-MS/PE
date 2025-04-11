@@ -1,6 +1,53 @@
 @PlatformOrchestrator.Api_HostAddress = http://localhost:5133
 
-GET {{PlatformOrchestrator.Api_HostAddress}}/weatherforecast/
+# Health check endpoint
+GET {{PlatformOrchestrator.Api_HostAddress}}/health
 Accept: application/json
+
+###
+
+# Get resources with filters and pagination
+GET {{PlatformOrchestrator.Api_HostAddress}}/api/orchestrator/resources?resourceType=virtualmachine&region=eastus&pageSize=10&pageNumber=1
+Accept: application/json
+
+###
+
+# Create a new deployment
+POST {{PlatformOrchestrator.Api_HostAddress}}/api/orchestrator/deployments
+Content-Type: application/json
+
+{
+  "name": "sample-vm",
+  "resourceType": "virtualmachine",
+  "region": "eastus",
+  "parameters": {
+    "vmSize": "Standard_D2s_v3",
+    "osType": "Linux"
+  },
+  "tags": {
+    "environment": "development",
+    "owner": "platformteam"
+  }
+}
+
+###
+
+# Get deployment status
+GET {{PlatformOrchestrator.Api_HostAddress}}/api/orchestrator/deployments/{{deploymentId}}
+Accept: application/json
+
+###
+
+# Execute an operation on a resource
+POST {{PlatformOrchestrator.Api_HostAddress}}/api/orchestrator/operations
+Content-Type: application/json
+
+{
+  "resourceId": "{{resourceId}}",
+  "operationType": "start",
+  "parameters": {
+    "forceBoot": true
+  }
+}
 
 ###
