@@ -22,8 +22,8 @@ graph TD
     C -->|Handles Authentication| F[MS Entra ID]
     C -->|Provides Telemetry| G[Azure Monitor]
 ```
+
 ```mermaid
-  Mermaid version
   info
 ```
 
