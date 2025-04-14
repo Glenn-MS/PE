@@ -11,14 +11,45 @@ A modern, scalable platform orchestrator built with C# and .NET 10 for managing 
 - **Azure Integration**: Fully integrated with Azure Resource Manager for cloud resource management
 - **Authentication & Authorization**: Secure access using MS Entra ID and role-based access control (RBAC)
 
-## Architecture
+## Architecture Diagram
 
-The solution follows a clean architecture pattern with the following components:
+```mermaid 
+graph TD
+    A[PlatformOrchestrator.Api] -->|Exposes API Endpoints| B[PlatformOrchestrator.Core]
+    B -->|Implements Business Logic| C[PlatformOrchestrator.Infrastructure]
+    C -->|Integrates with Azure Services| D[Azure Resource Manager]
+    C -->|Manages Secrets| E[Azure Key Vault]
+    C -->|Handles Authentication| F[MS Entra ID]
+    C -->|Provides Telemetry| G[Azure Monitor]
+```
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 
-- **PlatformOrchestrator.Api**: Web API project exposing orchestration endpoints
-- **PlatformOrchestrator.Core**: Core domain models and service interfaces
-- **PlatformOrchestrator.Infrastructure**: Implementation of services using Azure
+```mermaid
+  info
+```
+``` mermaid
+sequenceDiagram
+    Christie->>Josh: Hello Josh, how are you?
+    Josh-->>Christie: Great!
+    Christie->>Josh: See you later!
+```
+```mermaid
+  graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
 
+```mmd
+sequenceDiagram
+```
 ## Getting Started
 
 ### Prerequisites
