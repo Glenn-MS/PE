@@ -23,33 +23,10 @@ graph TD
     C -->|Provides Telemetry| G[Azure Monitor]
 ```
 ```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
-
-```mermaid
+  Mermaid version
   info
 ```
-``` mermaid
-sequenceDiagram
-    Christie->>Josh: Hello Josh, how are you?
-    Josh-->>Christie: Great!
-    Christie->>Josh: See you later!
-```
-```mermaid
-  graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
 
-```mmd
-sequenceDiagram
-```
 ## Getting Started
 
 ### Prerequisites
