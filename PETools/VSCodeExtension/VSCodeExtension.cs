@@ -27,5 +27,16 @@ namespace VSCodeExtension
             var request = new AIController.AIRequest { Endpoint = endpoint, Payload = payload };
             return await _apiController.PerformAction(request);
         }
+
+        public async Task<string> PerformCombinedAIAndApiAction(string endpoint, object payload)
+        {
+            // Call AI service
+            var aiResult = await _aiService.PerformActionAsync(endpoint, payload);
+            // Call API controller
+            var apiRequest = new AIController.AIRequest { Endpoint = endpoint, Payload = payload };
+            var apiResult = await _apiController.PerformAction(apiRequest);
+            // Combine results (simple concatenation, can be customized)
+            return $"AI Result: {aiResult}\nAPI Result: {apiResult}";
+        }
     }
 }
